@@ -18,272 +18,62 @@ def verificar_password(password):
         clave_secreta = "cholchol_2026.ml"
     return password == clave_secreta
 
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
-
 if 'autenticado' not in st.session_state:
     st.session_state.autenticado = False
+if 'login_error' not in st.session_state:
+    st.session_state.login_error = False
 
 if not st.session_state.autenticado:
-    # --- CSS LOGIN PROFESIONAL ---
+    # Fondo institucional
     st.markdown("""
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        * { font-family: 'Inter', sans-serif; }
-        
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #022448 0%, #1e3a5f 50%, #002252 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .login-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(0,81,213,0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%),
-                radial-gradient(circle at 40% 40%, rgba(0,34,82,0.2) 0%, transparent 30%);
-        }
-        
-        .login-card {
-            background: rgba(255,255,255,0.98);
-            border-radius: 24px;
-            padding: 3rem;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 
-                0 25px 50px -12px rgba(0,0,0,0.4),
-                0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 1px 0 rgba(255,255,255,0.2);
-            position: relative;
-            z-index: 10;
-        }
-        
-        .login-logo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .login-logo img {
-            width: 100px;
-            height: 100px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(2,36,72,0.3);
-            margin-bottom: 1rem;
-        }
-        
-        .login-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: #022448;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-        
-        .login-subtitle {
-            font-size: 0.9rem;
-            color: #43474e;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .login-input-container {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-        
-        .login-input-container input {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            font-size: 1rem;
-            border: 2px solid #e6e8ea;
-            border-radius: 12px;
-            background: #f7f9fb;
-            color: #191c1e;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
-        
-        .login-input-container input:focus {
-            outline: none;
-            border-color: #0051d5;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(0,81,213,0.15);
-        }
-        
-        .login-input-container input::placeholder {
-            color: #93c5fd;
-        }
-        
-        .login-button {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #022448 0%, #1e3a5f 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .login-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(2,36,72,0.4);
-        }
-        
-        .login-button:active {
-            transform: translateY(0);
-        }
-        
-        .login-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.75rem;
-            color: #93c5fd;
-        }
-        
-        .login-error {
-            background: #ffdad6;
-            border: 1px solid #ba1a1a;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            color: #93000a;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        
-        .institutional-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, rgba(2,36,72,0.1) 0%, rgba(0,81,213,0.1) 100%);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #022448;
-            margin-bottom: 1rem;
-        }
-        
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            color: #93c5fd;
-            font-size: 0.75rem;
-        }
-        
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #c4c6cf, transparent);
-        }
-        
-        .divider span {
-            padding: 0 1rem;
-        }
-        
-        .secure-icon {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: #16a534;
-            margin-top: 1rem;
-        }
+        .stApp { background: linear-gradient(135deg, #022448 0%, #1e3a5f 50%, #002252 100%); }
         </style>
-        
-        <div class="login-container">
-            <div class="login-card">
-                <div class="login-logo">
-                    <img src="https://raw.githubusercontent.com/antinaosDev/machinelearning_agend/main/image.png" onerror="this.src='image.png'" />
-                    <div class="institutional-badge">
-                        🔒 CESFAM Cholchol - Sistema Seguro
-                    </div>
-                </div>
-                
-                <h1 class="login-title">A2S Praedix</h1>
-                <p class="login-subtitle">Predicción Inteligente de Inasistencias</p>
-                
-                <form method="post">
-                    <div class="login-input-container">
-                        <input type="password" 
-                               name="password" 
-                               placeholder="🔑 Ingrese clave de acceso" 
-                               required
-                               autocomplete="current-password"/>
-                    </div>
-                    
-                    <button type="submit" class="login-button">
-                        🚀 Iniciar Sesión
-                    </button>
-                </form>
-                
-                <div class="secure-icon">
-                    <span>🔐</span>
-                    <span>Conexión segura con cifrado SSL</span>
-                </div>
-                
-                <div class="divider">
-                    <span>Acceso restringido al personal autorizado</span>
-                </div>
-            </div>
-        </div>
-        
-        <script>
-            document.querySelector('form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const input = document.querySelector('input[name="password"]');
-                const password = input.value;
-                const encoded = btoa(password);
-                window.location.href = '?password=' + encoded;
-            });
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            const passEncoded = urlParams.get('password');
-            if (passEncoded) {
-                try {
-                    const password = atob(passEncoded);
-                    document.querySelector('input[name="password"]').value = password;
-                } catch(e) {}
-            }
-        </script>
     """, unsafe_allow_html=True)
     
-    # Verificar password desde query params
-    query_params = st.query_params
-    if "password" in query_params:
-        try:
-            password = atob(query_params["password"])
-        except:
-            password = query_params["password"]
+    # Login con diseño limpio
+    col1, col2, col3 = st.columns([1, 1.5, 1])
+    with col2:
+        st.markdown("<div style='height: 80px;'></div>", unsafe_allow_html=True)
         
-        if verificar_password(password):
-            st.session_state.autenticado = True
-            st.query_params.clear()
-            st.rerun()
-        else:
-            st.markdown("""
-                <div class="login-error">
-                    ⚠️ Credenciales incorrectas. Por favor, verifique su clave de acceso.
-                </div>
-            """, unsafe_allow_html=True)
+        try:
+            st.image("image.png", width=90)
+        except:
+            st.markdown("### 🏥")
+        
+        st.markdown("""
+            <div style="text-align: center; margin: 1rem 0;">
+                <span style="background: rgba(255,255,255,0.15); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; color: white;">
+                    🔒 CESFAM Cholchol - Sistema Seguro
+                </span>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("### A2S Praedix", unsafe_allow_html=True)
+        st.markdown("**Predicción Inteligente de Inasistencias**")
+        
+        st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
+        
+        if st.session_state.login_error:
+            st.error("⚠️ Credenciales incorrectas. Verifique su clave de acceso.")
+        
+        password = st.text_input("🔑 Clave de acceso", type="password", placeholder="Ingrese su clave", key="login_password")
+        
+        if st.button("🚀 Iniciar Sesión", type="primary", use_container_width=True):
+            if verificar_password(password):
+                st.session_state.autenticado = True
+                st.session_state.login_error = False
+                st.rerun()
+            else:
+                st.session_state.login_error = True
+                st.rerun()
+        
+        st.markdown("""
+            <div style="text-align: center; margin-top: 1.5rem; color: #93c5fd; font-size: 0.8rem;">
+                🔐 Conexión segura con cifrado SSL<br>
+                <span style="opacity: 0.7;">Acceso restringido al personal autorizado</span>
+            </div>
+        """, unsafe_allow_html=True)
     
     st.stop()
 
