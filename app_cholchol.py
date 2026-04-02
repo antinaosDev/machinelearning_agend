@@ -80,13 +80,6 @@ if not st.session_state.autenticado:
             else:
                 st.session_state.login_error = True
                 st.rerun()
-        
-        st.markdown("""
-            <div style="text-align: center; margin-top: 1.5rem; color: #bfdbfe; font-size: 0.85rem; line-height: 1.8;">
-                🔐 Conexión segura con cifrado SSL<br>
-                <span style="opacity: 0.7;">Acceso restringido al personal autorizado</span>
-            </div>
-        """, unsafe_allow_html=True)
     
     st.stop()
 
