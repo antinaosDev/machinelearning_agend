@@ -988,7 +988,7 @@ elif st.session_state.current_screen == 'PlantillaGuia':
     # INFORMACIÓN GENERAL
     st.markdown("""<div class="info-box" style="margin-bottom: 2rem;">
         <h4 style="font-weight: 700; color: #022448; margin-bottom: 0.5rem;">📋 Acerca de esta Aplicación</h4>
-        <p style="color: #43474e; font-size: 0.9rem;">A2S Praedix es un sistema de predicción de inasistencias para el CESFAM Cholchol. Utiliza un modelo Random Forest entrenado con más de 430,000 registros históricos para predecir la probabilidad de que un paciente no asista a su cita agendada.</p>
+        <p style="color: #43474e; font-size: 0.9rem;">A2S Praedix es un sistema de predicción de inasistencias para el CESFAM Cholchol. Utiliza un modelo Random Forest entrenado con más de 430,000 registros históricos para predecir la probabilidad de que un paciente no asista a su hora agendada.</p>
     </div>""", unsafe_allow_html=True)
     
     # COLUMNAS REQUERIDAS
