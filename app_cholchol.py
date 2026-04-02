@@ -494,9 +494,9 @@ if st.session_state.current_screen == 'CargaMasiva':
     
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.markdown("""<div class="status-card" style="border-left: 4px solid #ba1a1a;"><div style="display: flex; justify-content: space-between; align-items: start;"><div><p class="metric-label">Riesgo Crítico (≥80%)</p><h2 style="font-size: 2.25rem; font-weight: 900; color: #191c1e;">91.1%</h2></div><div style="padding: 0.5rem; border-radius: 0.75rem; background: #ffdad6;"><span style="color: #ba1a1a; font-size: 1.25rem;">🔴</span></div></div><p style="margin-top: 1rem; font-size: 0.7rem; color: #43474e; opacity: 0.8;">Paciente rural citado 08:30 AM</p></div>""", unsafe_allow_html=True)
+        st.markdown("""<div class="status-card" style="border-left: 4px solid #ba1a1a;"><div style="display: flex; justify-content: space-between; align-items: start;"><div><p class="metric-label">Riesgo Crítico (≥70%)</p><h2 style="font-size: 2.25rem; font-weight: 900; color: #191c1e;">91.1%</h2></div><div style="padding: 0.5rem; border-radius: 0.75rem; background: #ffdad6;"><span style="color: #ba1a1a; font-size: 1.25rem;">🔴</span></div></div><p style="margin-top: 1rem; font-size: 0.7rem; color: #43474e; opacity: 0.8;">Paciente rural 08:30 AM</p></div>""", unsafe_allow_html=True)
     with col2:
-        st.markdown("""<div class="status-card" style="border-left: 4px solid #0051d5;"><div style="display: flex; justify-content: space-between; align-items: start;"><div><p class="metric-label">Riesgo Alto (60-80%)</p><h2 style="font-size: 2.25rem; font-weight: 900; color: #191c1e;">~60%</h2></div><div style="padding: 0.5rem; border-radius: 0.75rem; background: rgba(0,81,213,0.1);"><span style="color: #0051d5; font-size: 1.25rem;">🟠</span></div></div><p style="margin-top: 1rem; font-size: 0.7rem; color: #43474e; opacity: 0.8;">Hombre rural, horario laboral</p></div>""", unsafe_allow_html=True)
+        st.markdown("""<div class="status-card" style="border-left: 4px solid #0051d5;"><div style="display: flex; justify-content: space-between; align-items: start;"><div><p class="metric-label">Riesgo Alto (50-69%)</p><h2 style="font-size: 2.25rem; font-weight: 900; color: #191c1e;">~60%</h2></div><div style="padding: 0.5rem; border-radius: 0.75rem; background: rgba(0,81,213,0.1);"><span style="color: #0051d5; font-size: 1.25rem;">🟠</span></div></div><p style="margin-top: 1rem; font-size: 0.7rem; color: #43474e; opacity: 0.8;">Hombre rural, horario laboral</p></div>""", unsafe_allow_html=True)
     with col3:
         st.markdown("""<div class="status-card" style="border-left: 4px solid #002252;"><div style="display: flex; justify-content: space-between; align-items: start;"><div><p class="metric-label">Inasistencia General</p><h2 style="font-size: 2.25rem; font-weight: 900; color: #191c1e;">14.9%</h2></div><div style="padding: 0.5rem; border-radius: 0.75rem; background: rgba(0,34,82,0.1);"><span style="color: #002252; font-size: 1.25rem;">📊</span></div></div><p style="margin-top: 1rem; font-size: 0.7rem; color: #43474e; opacity: 0.8;">Promedio CESFAM Cholchol</p></div>""", unsafe_allow_html=True)
     with col4:
@@ -1049,18 +1049,15 @@ elif st.session_state.current_screen == 'PlantillaGuia':
         st.markdown("""<p style="color: #43474e;">Use el botón de descarga "Descargar Plantilla Excel" en esta sección para obtener la plantilla con el formato correcto.</p>""", unsafe_allow_html=True)
     
     with st.expander("¿Qué datos necesito para cada paciente?"):
-        st.markdown("""<p style="color: #43474e;">Para cada paciente debe proporcionar: género, procedencia (rural/urbano), escolaridad, previsión de salud, fecha y hora de la cita agendada. Los campos de condiciones especiales son opcionales.</p>""", unsafe_allow_html=True)
+        st.markdown("""<p style="color: #43474e;">Para cada paciente debe proporcionar: género, procedencia (rural/urbano), escolaridad, previsión de salud, fecha y hora agendada. Los campos de condiciones especiales son opcionales.</p>""", unsafe_allow_html=True)
     
     with st.expander("¿Qué significa cada nivel de riesgo?"):
-        st.markdown("""<p style="color: #43474e;"><strong>🔴 Riesgo Crítico (≥80%):</strong> Contactar inmediatamente por teléfono.<br>
-        <strong>🟡 Riesgo Alto (60-79%):</strong> Enviar recordatorio por WhatsApp.<br>
-        <strong>🟢 Riesgo Bajo (&lt;60%):</strong> No es necesario contactar.</p>""", unsafe_allow_html=True)
+        st.markdown("""<p style="color: #43474e;"><strong>🔴 Riesgo Crítico (≥70%):</strong> Contactar inmediatamente por teléfono.<br>
+        <strong>🟡 Riesgo Alto (50-69%):</strong> Enviar recordatorio por WhatsApp.<br>
+        <strong>🟢 Riesgo Bajo (&lt;50%):</strong> Monitoreo estándar.</p>""", unsafe_allow_html=True)
     
     with st.expander("¿Cómo se protege la privacidad de los pacientes?"):
-        st.markdown("""<p style="color: #43474e;">Los datos se procesan únicamente de forma local en su navegador. No se almacenan en servidores externos. El modelo fue entrenado con datos históricos anonimizados.</p>""", unsafe_allow_html=True)
-    
-    with st.expander("¿Puedo usar el sistema sin conexión a internet?"):
-        st.markdown("""<p style="color: #43474e;">Una vez cargada la página, el sistema funciona completamente sin conexión. Sin embargo, necesita internet para acceder inicialmente a la aplicación.</p>""", unsafe_allow_html=True)
+        st.markdown("""<p style="color: #43474e;">Los datos se procesan de forma local en el servidor de Streamlit. No se almacenan en servidores externos.</p>""", unsafe_allow_html=True)
 
 # Footer con logo centrado
 st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
