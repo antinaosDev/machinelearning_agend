@@ -781,15 +781,24 @@ elif st.session_state.current_screen == 'RegistroIndividual':
         
         st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
         
+        base_promedio = 14.9
+        base_genero = 15.8 if g_i == "FEMENINO" else 13.4
+        base_zona = 14.6 if p_i == "RURAL" else 15.3
+        base_prevision = 16.2 if "A" in pr_i else (14.5 if "B" in pr_i else 13.8)
+        
         comp_col1, comp_col2, comp_col3, comp_col4 = st.columns(4)
         with comp_col1:
-            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">Vs. Promedio Cholchol</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if p_res > 14.9 else '#16a534'}>{'+' if p_res > 14.9 else ''}{round(p_res - 14.9, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">vs 14.9% base</p></div>""", unsafe_allow_html=True)
+            diff_prom = p_res - base_promedio
+            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">📊 vs Promedio CESFAM</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if diff_prom > 0 else '#16a534'}>{'+' if diff_prom > 0 else ''}{round(diff_prom, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">Base: {base_promedio}% (histórico)</p></div>""", unsafe_allow_html=True)
         with comp_col2:
-            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">Mujeres (15.8%)</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if p_res > 15.8 else '#16a534'}>{'+' if p_res > 15.8 else ''}{round(p_res - 15.8, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">vs género</p></div>""", unsafe_allow_html=True)
+            diff_gen = p_res - base_genero
+            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">👫 vs Promedio {g_i.title()}</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if diff_gen > 0 else '#16a534'}>{'+' if diff_gen > 0 else ''}{round(diff_gen, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">Mujeres 15.8% | Hombres 13.4%</p></div>""", unsafe_allow_html=True)
         with comp_col3:
-            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">Hombres (13.4%)</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if p_res > 13.4 else '#16a534'}>{'+' if p_res > 13.4 else ''}{round(p_res - 13.4, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">vs género</p></div>""", unsafe_allow_html=True)
+            diff_zona = p_res - base_zona
+            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">📍 vs Promedio {p_i.title()}</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if diff_zona > 0 else '#16a534'}>{'+' if diff_zona > 0 else ''}{round(diff_zona, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">Rural 14.6% | Urbano 15.3%</p></div>""", unsafe_allow_html=True)
         with comp_col4:
-            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">T. Edad (10.5%)</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if p_res > 10.5 else '#16a534'}>{'+' if p_res > 10.5 else ''}{round(p_res - 10.5, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">vs grupo vulnerable</p></div>""", unsafe_allow_html=True)
+            diff_prev = p_res - base_prevision
+            st.markdown(f"""<div class="metric-card" style="text-align: center;"><p class="metric-label">🏥 vs Previsión {pr_i.split()[-1]}</p><p style="font-size: 1.5rem; font-weight: 700; color: {'#ba1a1a' if diff_prev > 0 else '#16a534'}>{'+' if diff_prev > 0 else ''}{round(diff_prev, 1)}%</p><p style="font-size: 0.7rem; color: #43474e;">FONASA A: 16.2% (mayor riesgo)</p></div>""", unsafe_allow_html=True)
 
 # ==================== PANTALLA 3: HISTORIA DEL PROYECTO ====================
 elif st.session_state.current_screen == 'HistoriaProyecto':
