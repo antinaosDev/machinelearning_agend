@@ -24,14 +24,27 @@ if 'login_error' not in st.session_state:
     st.session_state.login_error = False
 
 if not st.session_state.autenticado:
-    # Fondo institucional
     st.markdown("""
         <style>
         .stApp { background: linear-gradient(135deg, #022448 0%, #1e3a5f 50%, #002252 100%); }
+        h1, h2, h3, h4, h5, h6, p, label, .stMarkdown { color: white !important; }
+        div[data-testid="stTextInput"] label { color: white !important; font-weight: 600 !important; }
+        div[data-testid="stTextInput"] input { 
+            background: rgba(255,255,255,0.95) !important; 
+            color: #022448 !important;
+            border: 2px solid rgba(255,255,255,0.3) !important;
+        }
+        div[data-testid="stTextInput"] input::placeholder { color: #93c5fd !important; }
+        div[data-testid="stButton"] button {
+            background: linear-gradient(135deg, #0051d5 0%, #022448 100%) !important;
+            color: white !important;
+            font-weight: 700 !important;
+        }
+        .stAlert { background: rgba(255,218,214,0.95) !important; color: #93000a !important; }
+        .stAlert > div { color: #93000a !important; }
         </style>
     """, unsafe_allow_html=True)
     
-    # Login con diseño limpio
     col1, col2, col3 = st.columns([1, 1.5, 1])
     with col2:
         st.markdown("<div style='height: 80px;'></div>", unsafe_allow_html=True)
@@ -49,7 +62,7 @@ if not st.session_state.autenticado:
             </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("### A2S Praedix", unsafe_allow_html=True)
+        st.markdown("## A2S Praedix")
         st.markdown("**Predicción Inteligente de Inasistencias**")
         
         st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
@@ -69,7 +82,7 @@ if not st.session_state.autenticado:
                 st.rerun()
         
         st.markdown("""
-            <div style="text-align: center; margin-top: 1.5rem; color: #93c5fd; font-size: 0.8rem;">
+            <div style="text-align: center; margin-top: 1.5rem; color: #bfdbfe; font-size: 0.85rem; line-height: 1.8;">
                 🔐 Conexión segura con cifrado SSL<br>
                 <span style="opacity: 0.7;">Acceso restringido al personal autorizado</span>
             </div>
