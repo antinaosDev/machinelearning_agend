@@ -57,7 +57,7 @@ if not st.session_state.autenticado:
         st.markdown("""
             <div style="text-align: center; margin: 1rem 0;">
                 <span style="background: rgba(255,255,255,0.15); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; color: white;">
-                    🔒 CESFAM Cholchol - Sistema Seguro
+                    🔒 CESFAM Cholchol - Ingreso Plataforma
                 </span>
             </div>
         """, unsafe_allow_html=True)
